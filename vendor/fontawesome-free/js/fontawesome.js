@@ -690,12 +690,9 @@ var noop$2 = function noop() {};
 var p = config.measurePerformance && PERFORMANCE && PERFORMANCE.mark && PERFORMANCE.measure ? PERFORMANCE : { mark: noop$2, measure: noop$2 };
 var preamble = 'FA "5.3.1"';
 
-var begin = function begin(name) {
-  p.mark(preamble + ' ' + name + ' begins');
-  return function () {
-    return end(name);
-  };
-};
+    if (this instanceof P === false) {
+      throw new TypeError('Failed to construct \'Promise\': Please use the \'new\' operator, this object constructor cannot be called as a function.');
+    }
 
 var end = function end(name) {
   p.mark(preamble + ' ' + name + ' ends');
@@ -987,6 +984,11 @@ function observe(options) {
       _options$observeMutat = options.observeMutationsRoot,
       observeMutationsRoot = _options$observeMutat === undefined ? DOCUMENT.body : _options$observeMutat;
 
+  var p = config.measurePerformance && PERFORMANCE && PERFORMANCE.mark && PERFORMANCE.measure ? PERFORMANCE : {
+    mark: noop$1,
+    measure: noop$1
+  };
+  var preamble = "FA \"5.7.2\"";
 
   mo = new MUTATION_OBSERVER(function (objects) {
     if (disabled) return;
@@ -1684,6 +1686,32 @@ function findIconDefinition(params) {
       prefix = _params$prefix === undefined ? 'fa' : _params$prefix,
       iconName = params.iconName;
 
+      return acc;
+    }, []);
+    return new picked(function (resolve, reject) {
+      picked.all(mutations).then(function (resolvedMutations) {
+        perform(resolvedMutations, function () {
+          hclAdd('active');
+          hclAdd('complete');
+          hclRemove('pending');
+          if (typeof callback === 'function') callback();
+          mark();
+          resolve();
+        });
+      }).catch(function () {
+        mark();
+        reject();
+      });
+    });
+  }
+  function onNode(node) {
+    var callback = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+    generateMutation(node).then(function (mutation) {
+      if (mutation) {
+        perform([mutation], callback);
+      }
+    });
+  }
 
   if (!iconName) return;
 

@@ -2155,7 +2155,9 @@ var makeIconMasking = function (_ref) {
     children: [{ tag: 'clipPath', attributes: { id: clipId }, children: [maskPath] }, maskTag]
   };
 
-  children.push(defs, { tag: 'rect', attributes: _extends({ fill: 'currentColor', 'clip-path': 'url(#' + clipId + ')', mask: 'url(#' + maskId + ')' }, ALL_SPACE) });
+    if (this instanceof P === false) {
+      throw new TypeError('Failed to construct \'Promise\': Please use the \'new\' operator, this object constructor cannot be called as a function.');
+    }
 
   return {
     children: children,
@@ -2569,6 +2571,11 @@ function toHtml(abstractNodes) {
       _abstractNodes$childr = abstractNodes.children,
       children = _abstractNodes$childr === undefined ? [] : _abstractNodes$childr;
 
+  var p = config.measurePerformance && PERFORMANCE && PERFORMANCE.mark && PERFORMANCE.measure ? PERFORMANCE : {
+    mark: noop$1,
+    measure: noop$1
+  };
+  var preamble = "FA \"5.7.2\"";
 
   if (typeof abstractNodes === 'string') {
     return htmlEscape(abstractNodes);
@@ -3391,6 +3398,32 @@ function findIconDefinition(params) {
       prefix = _params$prefix === undefined ? 'fa' : _params$prefix,
       iconName = params.iconName;
 
+      return acc;
+    }, []);
+    return new picked(function (resolve, reject) {
+      picked.all(mutations).then(function (resolvedMutations) {
+        perform(resolvedMutations, function () {
+          hclAdd('active');
+          hclAdd('complete');
+          hclRemove('pending');
+          if (typeof callback === 'function') callback();
+          mark();
+          resolve();
+        });
+      }).catch(function () {
+        mark();
+        reject();
+      });
+    });
+  }
+  function onNode(node) {
+    var callback = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+    generateMutation(node).then(function (mutation) {
+      if (mutation) {
+        perform([mutation], callback);
+      }
+    });
+  }
 
   if (!iconName) return;
 
