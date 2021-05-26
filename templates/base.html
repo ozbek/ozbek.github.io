@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Personal homepage of Shuhrat Dehkanov">
+  <meta name="author" content="Shuhrat Dehkanov">
+
+  <link href="/favicon.ico" rel="shortcut icon" sizes="16x16">
+  <link href="https://cdn.jsdelivr.net/npm/bulma@0.9.2/css/bulma.min.css" rel="stylesheet" type="text/css">
+  <link href="/css/fontawesome.min.css" rel="stylesheet" type="text/css">
+  <link href="/css/brands.min.css" rel="stylesheet" type="text/css">
+
+  <title>efir.uz - Shuhrat Dehkanov</title>
+</head>
+
+<body>
+  <nav class="navbar" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://efir.uz">
+        <strong>EFIR.UZ</strong>
+      </a>
+
+      <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarMenu">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+
+    <div class="navbar-menu" id="navbarMenu">
+      <div class="navbar-end">
+        <div class="navbar-item">
+          <div class="buttons">
+            <a class="button" href="#kefir">KEFIR</a>
+            <a class="button" href="#webapps">WEB/APPS</a>
+            <a class="button" href="#contacts">CONTACTS</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <section class="section">
+    <div class="container">
+      {% block content %} {% endblock %}
+    </div>
+  </section>
+  <footer class="footer">
+    <div class="content has-text-centered">
+      <p>
+        <a href="https://efir.uz">Shuhrat Dehkanov</a> &#127279; 2021. The source code is licensed
+        <a href="http://opensource.org/licenses/mit-license.php">MIT</a>. The website content is licensed <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY NC SA 4.0</a>.
+      </p>
+    </div>
+  </footer>
+  <script src="js/navbar.js"></script>
+</body>
+
+</html>
